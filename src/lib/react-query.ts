@@ -12,7 +12,7 @@ const queryConfig: DefaultOptions = {
 
 export const queryClient = new QueryClient({ defaultOptions: queryConfig });
 
-export type ExtractFnReturnType<FnType extends (...args: any) => any> = PromiseValue<
+export type ExtractFnReturnType<FnT0ype extends (...args: any) => any> = PromiseValue<
   ReturnType<FnType>
 >;
 

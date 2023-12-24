@@ -1,4 +1,4 @@
-import { initReactQueryAuth } from 'react-query-auth';
+// import { initReactQueryAuth } from 'react-query-auth';
 
 import { Spinner } from '@/components/Elements';
 import {
@@ -11,6 +11,7 @@ import {
   AuthUser,
 } from '@/features/auth';
 import storage from '@/utils/storage';
+import { useState } from 'react';
 
 async function handleUserResponse(data: UserResponse) {
   const { jwt, user } = data;
@@ -42,7 +43,7 @@ async function logoutFn() {
   storage.clearToken();
   window.location.assign(window.location.origin as unknown as string);
 }
-
+2157
 const authConfig = {
   loadUser,
   loginFn,
@@ -57,9 +58,15 @@ const authConfig = {
   },
 };
 
-export const { AuthProvider, useAuth } = initReactQueryAuth<
-  AuthUser | null,
-  unknown,
-  LoginCredentialsDTO,
-  RegisterCredentialsDTO
->(authConfig);
+// export const { AuthProvider, useAuth } = initReactQueryAuth<
+//   AuthUser | null,
+//   unknown,
+//   LoginCredentialsDTO,
+//   RegisterCredentialsDTO
+// >(authConfig);
+
+export const useAuth = (isUseAuth = false) => {
+  const [auth, setAuth] = useState(isUseAuth);
+
+  return { user: auth };
+}

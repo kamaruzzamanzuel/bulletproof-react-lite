@@ -5,15 +5,12 @@ import { Spinner } from '@/components/Elements';
 import { MainLayout } from '@/components/Layout';
 import { lazyImport } from '@/utils/lazyImport';
 
-const { DiscussionsRoutes } = lazyImport(
-  () => import('@/features/discussions'),
-  'DiscussionsRoutes'
-);
+const { DiscussionsRoutes } = lazyImport(() => import('@/features/discussions'), 'DiscussionsRoutes');
 const { Dashboard } = lazyImport(() => import('@/features/misc'), 'Dashboard');
 const { Profile } = lazyImport(() => import('@/features/users'), 'Profile');
 const { Users } = lazyImport(() => import('@/features/users'), 'Users');
 
-const App = () => {
+const Protected = () => {
   return (
     <MainLayout>
       <Suspense
@@ -31,8 +28,8 @@ const App = () => {
 
 export const protectedRoutes = [
   {
-    path: '/app',
-    element: <App />,
+    path: '/',
+    element: <Protected />,
     children: [
       { path: '/discussions/*', element: <DiscussionsRoutes /> },
       { path: '/users', element: <Users /> },
